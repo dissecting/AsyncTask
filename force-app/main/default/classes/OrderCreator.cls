@@ -35,8 +35,9 @@ global class OrderCreator implements Database.Batchable <SObject> {
 
         List<CronTrigger> jobList = new List<CronTrigger>();
         jobList = [
-            SELECT Id
+            SELECT Id, CronJobDetail.Name
             FROM CronTrigger
+            WHERE CronJobDetail.Name =: label.hourlyLabel
         ];
 
         for (CronTrigger job : jobList) {
