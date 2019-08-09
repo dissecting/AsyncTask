@@ -29,14 +29,17 @@ global class OrderCreator implements Database.Batchable <SObject> {
         String hourCurrent = String.valueOf(currentHour);
         String scheduleFormat = label.schedulerFormat;
         String scheduleParam = String.format(scheduleFormat, new List<String> {minutesCount, hourCurrent});
+
         List<CronTrigger> jobList = new List<CronTrigger>();
         jobList = [
             SELECT Id
             FROM CronTrigger
         ];
+
         for (CronTrigger job : jobList) {
             system.abortJob(job.id);
         }
+
         system.schedule(label.hourlyLabel, scheduleParam, new HourlyOrderCreator());
     }
 }
