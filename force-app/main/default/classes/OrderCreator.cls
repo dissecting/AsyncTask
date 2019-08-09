@@ -2,6 +2,7 @@ global class OrderCreator implements Database.Batchable <SObject> {
 
     global Database.QueryLocator start(Database.BatchableContext bc){
         String query='SELECT Id FROM Contact LIMIT 5';
+
         return Database.getQueryLocator(query);
     }
 
@@ -24,8 +25,9 @@ global class OrderCreator implements Database.Batchable <SObject> {
     }
 
     global void finish(Database.BatchableContext bc){
-        Integer countMinutes = Integer.valueOf(DateTime.now().minute()) + 5;
-        Integer currentHour = Integer.valueOf(DateTime.now().hour());
+        Integer countMinutes = Integer.valueOf(DateTime.now().addMinutes(5).minute());
+        Boolean isCorrectMinute = Integer.valueOf(DateTime.now().minute()) > 54 ? false : true;
+        Integer currentHour = isCorrectMinute == true ? Integer.valueOf(DateTime.now().hour()) : Integer.valueOf(DateTime.now().addHours(1).hour());
         String minutesCount = String.valueOf(countMinutes);
         String hourCurrent = String.valueOf(currentHour);
         String scheduleFormat = label.schedulerFormat;

@@ -61,3 +61,4 @@ force-app/main/default/lwc/.eslintrc.json
 force-app/main/default/lwc/jsconfig.json
 force-app/main/default/staticresources/StaticResourceCoordinates.txt
 force-app/main/default/staticresources/StaticResourceCoordinates.resource-meta.xml
+.vim-force.com/session.properties
