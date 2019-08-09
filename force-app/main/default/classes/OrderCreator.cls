@@ -7,6 +7,7 @@ global class OrderCreator implements Database.Batchable <SObject> {
 
     global void execute(Database.BatchableContext bc, List<Contact> scope){
         List<Order__c> orders = new List<Order__c>();
+
         if(scope.size() != 0){
             for (Contact contacts : scope) {
                 for (Integer i = 0; i < 5; i++) {
