@@ -26,8 +26,7 @@ global class OrderCreator implements Database.Batchable <SObject> {
 
     global void finish(Database.BatchableContext bc){
         Integer countMinutes = Integer.valueOf(DateTime.now().addMinutes(5).minute());
-        Boolean isCorrectMinute = Integer.valueOf(DateTime.now().minute()) > 54 ? false : true;
-        Integer currentHour = isCorrectMinute == true ? Integer.valueOf(DateTime.now().hour()) : Integer.valueOf(DateTime.now().addHours(1).hour());
+        Integer currentHour = Integer.valueOf(DateTime.now().addMinutes(5).hour());
         String minutesCount = String.valueOf(countMinutes);
         String hourCurrent = String.valueOf(currentHour);
         String scheduleFormat = label.schedulerFormat;
